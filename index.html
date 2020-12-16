@@ -17,6 +17,7 @@
 	<script>
 		function logout(){
 			SN_CSM_EC.onLogout();
+			 window.localStorage.setItem("loggin", "false"); 
 		}
 
 		function tokenUpdated(){
@@ -83,12 +84,13 @@ SN_CSM_EC.init({
 /* Call SN_CSM_EC.onLogout() function to terminate the user session in the Engagement Center automatically when the user logs out from the main portal */
 </script>
 		<script>
-		var params = window.location.hash.substring(1).split("&");
-		var idToken = "";
-		var userID;
-		if(params[0].indexOf('id_token') != "-1"){
+	var params = window.location.hash.substring(1).split("&");
+	var idToken = "";
+	var userID;
+	if(params[0].indexOf('id_token') != "-1"  &&  window.localStorage.getItem("loggin") != "true"){
+                window.localStorage.setItem("loggin", "true");
 		SN_CSM_EC.onLogin();
 		}
-		</script> 
+	</script> 
 	</body>	
 </html>
